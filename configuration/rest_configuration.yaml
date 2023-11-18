@@ -1,0 +1,35 @@
+service_title: Insurance Charges Model Service
+models:
+  - class_path: insurance_charges_model.prediction.model.InsuranceChargesModel
+    create_endpoint: true
+    decorators:
+      - class_path: ml_model_logging.logging_decorator.LoggingDecorator
+        configuration:
+          input_fields: ["age", "sex"]
+          output_fields: ["charges"]
+logging:
+    version: 1
+    disable_existing_loggers: false
+    formatters:
+      json_formatter:
+        class: pythonjsonlogger.jsonlogger.JsonFormatter
+        format: "%(asctime)s %(node_ip)s %(name)s %(levelname)s %(message)s"
+    filters:
+      environment_info_filter:
+        "()": ml_model_logging.filters.EnvironmentInfoFilter
+        env_variables:
+        - NODE_IP
+    handlers:
+      stdout:
+        level: INFO
+        class: logging.StreamHandler
+        stream: ext://sys.stdout
+        formatter: json_formatter
+        filters:
+        - environment_info_filter
+    loggers:
+      root:
+        level: INFO
+        handlers:
+        - stdout
+        propagate: true

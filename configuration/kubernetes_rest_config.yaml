@@ -1,0 +1,37 @@
+service_title: Credit Risk Model Service
+models:
+  - class_path: credit_risk_model.prediction.model.CreditRiskModel
+    create_endpoint: true
+    decorators:
+      - class_path: ml_model_logging.logging_decorator.LoggingDecorator
+        configuration:
+          input_fields: [ "collections_in_last_12_months", "debt_to_income_ratio" ]
+          output_fields: [ "credit_risk" ]
+logging:
+    version: 1
+    disable_existing_loggers: false
+    formatters:
+      json_formatter:
+        class: pythonjsonlogger.jsonlogger.JsonFormatter
+        format: "%(asctime)s %(pod_name)s %(node_name)s %(app_name)s %(name)s %(levelname)s %(message)s"
+    filters:
+      environment_info_filter:
+        "()": ml_model_logging.filters.EnvironmentInfoFilter
+        env_variables:
+        - POD_NAME
+        - NODE_NAME
+        - APP_NAME
+    handlers:
+      stdout:
+        level: INFO
+        class: logging.StreamHandler
+        stream: ext://sys.stdout
+        formatter: json_formatter
+        filters:
+        - environment_info_filter
+    loggers:
+      root:
+        level: INFO
+        handlers:
+        - stdout
+        propagate: true

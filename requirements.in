@@ -1,0 +1,4 @@
+ml_base>=0.2.0
+rest_model_service>=0.3.1
+python-json-logger
+-e git+https://github.com/uqam-lomagnin/regression_model_socratis01_fixed#egg=insurance_charges_model
