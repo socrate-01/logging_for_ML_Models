@@ -1,12 +1,12 @@
-service_title: Credit Risk Model Service
+service_title: Insurance Charges Model Service
 models:
-  - class_path: credit_risk_model.prediction.model.CreditRiskModel
+  - class_path: insurance_charges_model.prediction.model.InsuranceChargesModel
     create_endpoint: true
     decorators:
       - class_path: ml_model_logging.logging_decorator.LoggingDecorator
         configuration:
-          input_fields: [ "collections_in_last_12_months", "debt_to_income_ratio" ]
-          output_fields: [ "credit_risk" ]
+          input_fields: ["age", "sex"]
+          output_fields: ["charges"]
 logging:
     version: 1
     disable_existing_loggers: false

@@ -94,7 +94,7 @@ psutil==5.9.6
     # via
     #   distributed
     #   featuretools
-pydantic==2.5.0
+pydantic==1.10.5
     # via
     #   fastapi
     #   ml-base

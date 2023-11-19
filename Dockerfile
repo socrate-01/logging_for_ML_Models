@@ -1,11 +1,19 @@
 # syntax=docker/dockerfile:1
-FROM python:3.9-slim as base
+FROM python:3.11-slim as base
 
 WORKDIR /dependencies
 
 # installing git because we need to install the model package from the github repository
 RUN apt-get update -y && \
     apt-get install -y --no-install-recommends git
+
+# Install dependencies based on the operating system
+RUN if [ "$(uname)" = "Linux" ]; then \
+    apt-get update && apt-get install -y gcc python3-dev \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*; \
+    elif [ "$(uname)" = "Darwin" ]; then \
+    brew install gcc; \
+    fi
 
 # creating and activating a virtual environment
 ENV VIRTUAL_ENV=/opt/venv
@@ -30,7 +38,7 @@ LABEL org.opencontainers.image.source="https://github.com/schmidtbri/logging-for
 LABEL org.opencontainers.image.version=$VERSION
 LABEL org.opencontainers.image.revision=$REVISION
 LABEL org.opencontainers.image.licenses="MIT License"
-LABEL org.opencontainers.image.base.name="python:3.9-slim"
+LABEL org.opencontainers.image.base.name="python:3.11-slim"
 
 WORKDIR /service
 

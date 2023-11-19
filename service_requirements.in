@@ -1,4 +1,5 @@
 ml_base>=0.2.0
 rest_model_service>=0.3.1
 python-json-logger
--e git+https://github.com/schmidtbri/health-checks-for-ml-model-deployments#egg=credit_risk_model
+pydantic==1.10.5
+-e git+https://github.com/uqam-lomagnin/regression_model_socratis01_fixed#egg=insurance_charges_model
