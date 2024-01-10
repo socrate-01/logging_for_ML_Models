@@ -15,7 +15,7 @@ The Makefile included with this project contains targets that help to automate s
 To download the source code execute this command:
 
 ```bash
-git clone https://github.com/schmidtbri/logging-for-ml-models
+git clone  https://github.com/socrate-01/logging_for_ML_Models.git
 ```
 
 Then create a virtual environment and activate it:
