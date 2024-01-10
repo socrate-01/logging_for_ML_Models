@@ -6,7 +6,7 @@ This code is used in this [blog post](https://www.tekhnoal.com/logging-for-ml-mo
 
 ## Requirements
 
-- Python 3.5 or above
+- Python 3.9 or above
 
 ## Installation 
 
